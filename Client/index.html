@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather Planner</title>
+        <script src="https://unpkg.com/vue@3"></script>
+        <script defer src="client.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="app">
+
+            <!-- Single clean banner -->
+            <header class="banner">
+                <div class="search-container">
+                    <input v-model="city" placeholder="Enter a city..." />
+                    <button @click="getWeather">Get Forecast</button>
+                </div>
+
+                <div class="banner-title">
+                    <img src="assets/sun.png" alt="Sun icon" class="logo">
+                    <h1>Weather Planner</h1>
+                </div>
+            </header>
+
+            <!-- error message under banner -->
+            <p v-if="error" class="error">{{ error }}</p>
+
+            <!--  Wardrobe Section -->
+            <section class="wardrobe-section">
+                <h2>Your Wardrobe</h2>
+
+                <div class="wardrobe-inputs">
+                    <input v-model="newItem" placeholder="Add clothing item..."
+                        @keyup.enter="addItem">
+
+                    <select v-model="newType">
+                        <option disabled value>Select weather type</option>
+                        <option>All Weather</option>
+                        <option>Cold</option>
+                        <option>Mild</option>
+                        <option>Hot</option>
+                        <option>Rainy</option>
+                    </select>
+
+                    <button @click="addItem">Add</button>
+                </div>
+
+                <ul class="wardrobe-list">
+                    <li v-for="(item, index) in wardrobe" :key="index">
+                        {{ item.name }} — <strong>{{ item.type }}</strong>
+                        <button @click="removeItem(index)">❌</button>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Packing Advice -->
+            <section v-if="packingAdvice" class="advice-section">
+                <h2>{{ cityName }}</h2>
+                <p class="advice">{{ packingAdvice }}</p>
+            </section>
+
+            <!-- View Toggle -->
+            <div v-if="forecast.length" class="toggle-buttons">
+                <button :class="{active: view==='summary'}"
+                    @click="view='summary'">3-Day Summary</button>
+                <button :class="{active: view==='daily'}"
+                    @click="view='daily'">Day-by-Day</button>
+            </div>
+
+            <!-- 3-Day Summary Table -->
+            <section v-if="view==='summary'" class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Icon</th>
+                            <th>Avg Temp (°C)</th>
+                            <th>Avg Wind (m/s)</th>
+                            <th>Total Rain (mm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(day, index) in summaryData" :key="index">
+                            <td>{{ day.date }}</td>
+                            <td>
+                                <img v-if="day.icon"
+                                    :src="`https://openweathermap.org/img/wn/${day.icon}@2x.png`"
+                                    alt="icon" width="40">
+                            </td>
+                            <td>{{ day.temp.toFixed(1) }}</td>
+                            <td>{{ day.wind.toFixed(1) }}</td>
+                            <td>{{ day.rain.toFixed(1) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Day-by-Day Detail -->
+            <section v-if="view==='daily'" class="table-section">
+                <select v-model="selectedDay">
+                    <option v-for="(day, index) in daysList" :key="index"
+                        :value="day">{{ day }}</option>
+                </select>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Icon</th>
+                            <th>Temp (°C)</th>
+                            <th>Wind (m/s)</th>
+                            <th>Rain (mm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(row, i) in dailyDetails" :key="i">
+                            <td>{{ row.time }}</td>
+                            <td>
+                                <img v-if="row.icon"
+                                    :src="`https://openweathermap.org/img/wn/${row.icon}@2x.png`"
+                                    width="40">
+                            </td>
+                            <td>{{ row.temp }}</td>
+                            <td>{{ row.wind }}</td>
+                            <td>{{ row.rain }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Air Quality Section -->
+            <section
+                v-if="airQuality"
+                class="air-section"
+                :class="{
+        'good-air': airQuality.category === 'Good',
+        'moderate-air': airQuality.category === 'Fair' || airQuality.category === 'Moderate',
+        'poor-air': airQuality.category === 'Poor' || airQuality.category === 'Very Poor'
+      }">
+                <h2>Air Quality: {{ airQuality.category }}</h2>
+                <p>{{ airQuality.warning }}</p>
+            </section>
+
+            <!-- Popular Destinations -->
+            <section class="destinations-section">
+                <h2>Popular Destinations</h2>
+                <p>Explore the weather in some of the world's most visited
+                    cities.</p>
+                <button onclick="window.location.href='destinations.html'">View
+                    Destinations</button>
+            </section>
+
+        </div>
+    </body>
+</html>

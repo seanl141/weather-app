@@ -1,0 +1,305 @@
+/* General layout */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: #f5f9ff;
+  color: #333;
+  text-align: center;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, #007BFF, #00A6FF);
+  transition: background 0.8s ease-in-out;
+  position: sticky;     
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  width: 50px;          
+  height: 50px;
+}
+
+.banner-title {
+  display: flex;
+  align-items: center;   
+  gap: 10px;
+}
+
+.banner-title h1 {
+  font-size: 1.8rem;
+  color: white;
+  margin: 0;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-container input {
+  padding: 8px 12px;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+  width: 180px;
+}
+
+.search-container input::placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.search-container button {
+  background: white;
+  color: #007BFF;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.search-container button:hover {
+  background: #e0e0e0;
+}
+
+
+/* Input area */
+.input-section {
+  margin: 30px 0;
+}
+
+
+.input-section input,
+.wardrobe-section input {
+  padding: 10px;
+  width: 200px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-section button,
+.wardrobe-section button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-section button:hover,
+.wardrobe-section button:hover {
+  background: #0056b3;
+}
+
+/* Advice */
+.advice-section {
+  background: white;
+  white-space: pre-line;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 60%;
+  margin: 0 auto 30px;
+  padding: 20px;
+}
+
+.advice {
+  font-size: 1.2rem;
+  color: #007BFF;
+  margin-top: 10px;
+}
+
+/* Table */
+.table-section {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+th {
+  background: #007BFF;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: #f0f7ff;
+}
+
+.toggle-buttons {
+  margin: 20px 0;
+}
+
+.toggle-buttons button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-buttons button.active {
+  background: #0056b3;
+}
+
+select {
+  padding: 8px;
+  border: 2px solid #007BFF;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.air-section {
+  width: 60%;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.air-section h2 {
+  color: #007BFF;
+  margin-bottom: 10px;
+}
+
+.air-section p {
+  white-space: pre-line; /* preserves line breaks in warning text */
+}
+
+
+.wardrobe-section {
+  background: white;
+  border-radius: 12px;
+  width: 60%;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.wardrobe-section h2 {
+  color: #007BFF;
+}
+
+.wardrobe-list {
+  list-style: none;
+  padding: 0;
+}
+
+.wardrobe-list li {
+  display: inline-block;
+  background: #f1f5ff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 5px;
+}
+
+.wardrobe-list button {
+  background: none;
+  border: none;
+  color: #d33;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+/*Popular Destinations Section (on index) */
+.destinations-section {
+  margin: 40px auto;
+  text-align: center;
+}
+
+.destinations-section button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.destinations-section button:hover {
+  background: #0056b3;
+}
+
+/* Destination Page Grid */
+.destinations-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.city-card {
+  background: white;
+  border-radius: 12px;
+  width: 200px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: center;
+}
+.city-card:hover {
+  transform: scale(1.05);
+}
+.city-card h3 {
+  margin: 10px 0;
+}
+.city-img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* City weather info */
+.destination-weather {
+  text-align: center;
+  padding: 20px;
+}
+.destination-weather button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+
+/* Error message */
+.error {
+  color: red;
+  font-weight: bold;
+}
